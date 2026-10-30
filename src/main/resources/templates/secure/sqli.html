@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 검색 (안전 버전)</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 960px; margin: 40px auto; padding: 0 16px; color: #1a1a1a; }
+        h1 { font-size: 1.4rem; }
+        .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+        @media (max-width: 720px) { .cols { grid-template-columns: 1fr; } }
+        section h2 { font-size: 1.05rem; margin-bottom: 8px; }
+        form { display: flex; gap: 8px; margin: 8px 0 4px; }
+        input[type=text] { flex: 1; padding: 9px 11px; font-size: 0.95rem; border: 1px solid #ccc; border-radius: 6px; }
+        button { padding: 9px 16px; border: 0; border-radius: 6px; background: #16a34a; color: #fff; cursor: pointer; }
+        table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+        th, td { border: 1px solid #e2e2e2; padding: 6px 8px; text-align: left; font-size: 0.85rem; vertical-align: top; }
+        th { background: #f5f5f5; }
+        .muted { color: #888; font-size: 0.85rem; }
+        .count { margin-top: 10px; color: #555; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+<h1>게시글 검색 <small style="color:#16a34a;">(안전 버전)</small></h1>
+
+<div class="cols">
+    <!-- ============ JDBC 바인딩 검색 ============ -->
+    <section>
+        <h2>JDBC 바인딩 검색</h2>
+        <form method="get" th:action="@{/secure/sqli/search/jdbc}">
+            <input type="text" name="keyword" placeholder="제목으로 검색"
+                   th:value="${jdbcKeyword}">
+            <button type="submit">검색</button>
+        </form>
+
+        <div th:if="${jdbcResults != null}">
+            <p class="count">
+                결과 <strong th:text="${#lists.size(jdbcResults)}">0</strong>건
+            </p>
+            <table th:if="${!#lists.isEmpty(jdbcResults)}">
+                <thead>
+                <tr><th>post_id</th><th>title</th><th>content</th><th>is_secret</th></tr>
+                </thead>
+                <tbody>
+                <tr th:each="row : ${jdbcResults}">
+                    <td th:text="${row['post_id']}"></td>
+                    <td th:text="${row['title']}"></td>
+                    <td th:text="${row['content']}"></td>
+                    <td th:text="${row['is_secret']}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <p th:if="${#lists.isEmpty(jdbcResults)}" class="muted">검색 결과가 없습니다.</p>
+        </div>
+    </section>
+
+    <!-- ============ JPA 검색 ============ -->
+    <section>
+        <h2>JPA 검색</h2>
+        <form method="get" th:action="@{/secure/sqli/search/jpa}">
+            <input type="text" name="keyword" placeholder="제목으로 검색"
+                   th:value="${jpaKeyword}">
+            <button type="submit">검색</button>
+        </form>
+
+        <div th:if="${jpaResults != null}">
+            <p class="count">
+                결과 <strong th:text="${#lists.size(jpaResults)}">0</strong>건
+            </p>
+            <table th:if="${!#lists.isEmpty(jpaResults)}">
+                <thead>
+                <tr><th>post_id</th><th>title</th><th>content</th><th>is_secret</th></tr>
+                </thead>
+                <tbody>
+                <tr th:each="post : ${jpaResults}">
+                    <td th:text="${post.id}"></td>
+                    <td th:text="${post.title}"></td>
+                    <td th:text="${post.content}"></td>
+                    <td th:text="${post.secret}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <p th:if="${#lists.isEmpty(jpaResults)}" class="muted">검색 결과가 없습니다.</p>
+        </div>
+    </section>
+</div>
+</body>
+</html>
