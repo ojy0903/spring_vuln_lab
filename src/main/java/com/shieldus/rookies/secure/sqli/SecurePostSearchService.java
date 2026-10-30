@@ -33,7 +33,7 @@ public class SecurePostSearchService {
 //                .map(PostResponse::from)
 //                .toList();
 
-        List<Post> posts = postRepository.findBySecretFalseAndTitleContaining(keyword);
+        List<Post> posts = postRepository.findPublicPostsByTitle(keyword);
         List<PostResponse> responses = new ArrayList<>();
         for (Post post : posts) {
             PostResponse response = PostResponse.from(post);
