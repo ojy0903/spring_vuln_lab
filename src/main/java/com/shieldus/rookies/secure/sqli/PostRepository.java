@@ -14,7 +14,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("""
     SELECT p
     FROM Post p
-    WHERE p.secret = false AND p.title LIKE :keyword
+    WHERE p.secret = false AND p.title LIKE CONCAT('%', :keyword, '%')
     """)
     List<Post> findPublicPostsByTitle(@Param("keyword") String keyword);
 }
