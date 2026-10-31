@@ -1,5 +1,7 @@
 package com.shieldus.rookies.secure.sqli;
 
+import com.shieldus.rookies.common.dtos.PostResponse;
+import com.shieldus.rookies.common.repository.PostRepository;
 import com.shieldus.rookies.common.entity.Post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
