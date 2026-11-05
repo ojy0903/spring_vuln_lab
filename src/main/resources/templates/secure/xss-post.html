@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 2차 방어: 인라인 스크립트·on* 이벤트 핸들러 실행 차단 -> 이스케이프가 뚫려도 스크립트가 실행되지 않음 -->
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self'">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${post.title}">게시글</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 860px; margin: 40px auto; padding: 0 16px; color: #1a1a1a; }
+        .content { white-space: pre-wrap; border: 1px solid #e2e2e2; border-radius: 6px; padding: 16px; }
+    </style>
+</head>
+<body>
+<p><a th:href="@{/secure/xss}">← 목록</a></p>
+
+<h1 th:text="${post.title}">title</h1>
+
+<!-- 패치: 서비스에서 Safelist로 정제된 HTML만 전달되므로 th:utext 유지 (서식 태그는 살리고 스크립트는 제거된 상태) -->
+<div class="content" th:utext="${post.content}"></div>
+</body>
+</html>
