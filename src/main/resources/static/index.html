@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rookies Vuln Lab</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 860px; margin: 40px auto; padding: 0 16px; color: #1a1a1a; }
+        h1 { font-size: 1.4rem; margin-bottom: 4px; }
+        .sub { color: #666; font-size: 0.92rem; margin-top: 0; }
+        h2 { font-size: 1.1rem; margin-top: 32px; border-bottom: 1px solid #e2e2e2; padding-bottom: 6px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 12px; }
+        .card { display: block; border: 1px solid #e2e2e2; border-radius: 8px; padding: 16px; text-decoration: none; color: inherit; }
+        .card:hover { border-color: #2563eb; background: #f8faff; }
+        .tag { display: inline-block; font-size: 0.75rem; font-weight: 600; padding: 2px 8px; border-radius: 4px; margin-bottom: 8px; }
+        .tag.vuln { background: #fde8e8; color: #b91c1c; }
+        .tag.secure { background: #e3f6e8; color: #15803d; }
+        .card strong { display: block; margin-bottom: 4px; }
+        .card code { font-size: 0.85rem; color: #2563eb; }
+        .card p { margin: 8px 0 0; font-size: 0.88rem; color: #555; }
+        .note { margin-top: 32px; font-size: 0.85rem; color: #888; }
+    </style>
+</head>
+<body>
+<h1>Rookies Vuln Lab</h1>
+<p class="sub">OWASP 취약점 실습: 취약 버전과 안전 버전 비교</p>
+
+<h2>01. SQL Injection</h2>
+<div class="grid">
+    <a class="card" href="/vuln/sqli">
+        <span class="tag vuln">VULN</span>
+        <strong>게시글 검색 (취약)</strong>
+        <code>/vuln/sqli</code>
+        <p>JdbcTemplate 문자열 연결로 쿼리 생성</p>
+    </a>
+    <a class="card" href="/secure/sqli">
+        <span class="tag secure">SECURE</span>
+        <strong>게시글 검색 (안전)</strong>
+        <code>/secure/sqli</code>
+        <p>JDBC 파라미터 바인딩 / JPA 메서드 검색</p>
+    </a>
+</div>
+
+<p class="note">※ /vuln/** 엔드포인트는 local 프로필에서만 활성화됩니다.</p>
+</body>
+</html>
