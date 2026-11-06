@@ -41,6 +41,22 @@
     </a>
 </div>
 
+<h2>02. Cross-Site Scripting (XSS)</h2>
+<div class="grid">
+    <a class="card" href="/vuln/xss">
+        <span class="tag vuln">VULN</span>
+        <strong>게시판 (취약)</strong>
+        <code>/vuln/xss</code>
+        <p>검색어·본문을 th:utext로 이스케이프 없이 출력 (Reflected / Stored)</p>
+    </a>
+    <a class="card" href="/secure/xss">
+        <span class="tag secure">SECURE</span>
+        <strong>게시판 (안전)</strong>
+        <code>/secure/xss</code>
+        <p>검색어는 th:text 이스케이프, 본문은 Jsoup Safelist 정제</p>
+    </a>
+</div>
+
 <p class="note">※ /vuln/** 엔드포인트는 local 프로필에서만 활성화됩니다.</p>
 </body>
 </html>
