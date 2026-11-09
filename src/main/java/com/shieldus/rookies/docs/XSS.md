@@ -58,13 +58,13 @@ public void create(String title, String content) {
 }
 ```
 
-템플릿 — 출력 시 **`th:utext`(이스케이프 안 함)** 가 싱크다.
+템플릿 — 출력 시 **`th:utext`(이스케이프 안 함)** 
 
 ```html
-<!-- templates/vuln/xss.html : Reflected 싱크 -->
+<!-- templates/vuln/xss.html : Reflected XSS -->
 <p th:if="${message != null}" th:utext="${message}"></p>
 
-<!-- templates/vuln/xss-post.html : Stored 싱크 -->
+<!-- templates/vuln/xss-post.html : Stored XSS -->
 <div class="content" th:utext="${post.content}"></div>
 ```
 
