@@ -1,4 +1,4 @@
-package com.shieldus.rookies.secure.sqli;
+package com.shieldus.rookies.common.dtos;
 
 import com.shieldus.rookies.common.entity.Post;
 
